@@ -21,6 +21,12 @@ printBin :: Bin -> String
 printBin All = "All bins"
 printBin Recycling = "Recycling"
 
+data BinDate = BinDate Bin Date
+
+derive instance Eq BinDate
+instance Ord BinDate where
+  compare (BinDate _ a) (BinDate _ b) = compare a b
+
 -- C = all, R = recycling
 type Response = Array
   { "C1" :: String
@@ -30,12 +36,6 @@ type Response = Array
   , "R2" :: String
   , "R3" :: String
   }
-
-data BinDate = BinDate Bin Date
-
-derive instance Eq BinDate
-instance Ord BinDate where
-  compare (BinDate _ a) (BinDate _ b) = compare a b
 
 type ParsedResponse = Array BinDate
 
